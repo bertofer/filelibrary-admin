@@ -1,0 +1,13 @@
+.navbar-toggle {
+    float: left
+}
+@media (min-width: 768px) {
+  .nav {
+    height: 64px;
+  }
+  //Fix for the navbar, got a lot of problems with it.
+  .collapsing {
+    display:block;
+    height: 64px !important;
+  }
+}

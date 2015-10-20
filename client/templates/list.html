@@ -1,0 +1,35 @@
+<div class="panel panel-success">
+  <!--<div class="panel-heading">
+    <span class='text-left'>FILES</span>
+  </div>-->
+  <div id='list-container'>
+    <ul class="list-group" ng-if='main.uploadingFiles.length > 0 || list.data.files.length > 0'>
+      <li class='list-group-item row new-file-element pointer' ng-repeat='ufile in main.uploadingFiles'>
+        <div class=''>
+          {{ufile.name}}</br>
+        </div>
+        <div>
+          <uib-progressbar value='ufile.progress' type='success' animate='true'></uib-progressbar>
+        </div>
+      </li>
+
+    <!--<ul class="list-group" ng-if='list.data.files && list.data.files.length > 0'>-->
+      <li class='list-group-item row pointer' ng-repeat='file in list.data.files' ui-sref='.file({id: file._id})'>
+        <div class='item-element'>
+          <div class="file-icon file-icon-lg" ng-attr-data-type="{{list.getDataType(file)}}"></div>
+        </div>
+        <div class='item-element'>
+          {{file.name}}</br>
+          {{file.created | date: 'dd ' + 'MMMM ' + 'yyyy' }}</br>
+          {{list.getPrettySize(file.size)}}
+        </div>
+        <div class='pull-right'>
+          <i class='glyphicon glyphicon-chevron-right item-arrow'></i>
+        </div>
+      </li>
+    </ul>
+    <div class='panel-body' ng-if='list.data.files.length === 0'>
+      <span>There aren't any files yet! Try adding a new one from the bottom right button</span>
+    </div>
+  </div>
+</div>

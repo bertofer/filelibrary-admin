@@ -1,0 +1,32 @@
+<html>
+
+<head>
+  <link rel='stylesheet' href='https://bootswatch.com/paper/bootstrap.css'>
+  <link rel="stylesheet" href="dist/app.css"/>
+
+  <script src="dist/app.js"></script>
+  <script src="dist/ngConstants.js"></script>
+  <title>FileLibrary Admin</title>
+</head>
+
+<body ng-app="filelibraryAdmin" ng-controller='mainController as main'>
+
+  <ng-include src="'templates/navbar.html'"></ng-include>
+
+  <div class='container fill'>
+    <div class='row'>
+      <div ui-view='partSize1' ng-class='main.getListClasses()'>
+
+      </div>
+      <div ui-view='partSize2' class='col-xs-12 col-md-6'>
+
+      </div>
+    </div>
+  </div>
+
+  <div class='floating-btn'>
+    <button class='btn btn-success btn-circle btn-xl' ng-if='main.shouldShowNewButton()' ng-click='main.openNewFileDialog()'>+</button>
+  </div>
+</body>
+
+</html>

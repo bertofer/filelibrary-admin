@@ -1,0 +1,74 @@
+@import "scrollbar";
+@import "navbar";
+@import "file_icons";
+@import "btn_circle";
+@import "ngProgress";
+
+body {
+  background-color: #eeeeee;
+}
+
+#list-container {
+  position:relative;
+}
+
+.fill {
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    //width: auto;
+    //height: auto;
+}
+
+.partSize1 {
+  overflow-y: scroll;
+  height: 98%;
+}
+
+.item-element {
+  float:left;
+  margin-left: 20px;
+}
+
+.new-file-element {
+  padding: 20px 40px 20px 40px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.list-group {
+  .row {
+    margin: 0px;
+  }
+  .row:hover {
+    background-color: #dddddd;
+  }
+  .item-arrow {
+    margin-top: 22px;
+  }
+}
+
+.select-file-name {
+  font-size: 16px;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.floating-btn {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+}
+
+.file-title h4{
+  word-wrap: break-word;
+}
+
+.torrent-options {
+  margin-top: 75px;
+  width:100%;
+}

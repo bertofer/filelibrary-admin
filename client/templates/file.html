@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class='file-title text-center'>
+      <h4>{{file.file.name}}</h4>
+    </div>
+    <!--<textarea ng-model='file.file.description' ></textarea>-->
+    <div ng-show='editDescription'>
+      <form class='form-group'>
+        <textarea ng-model='file.file.description' class='form-control'></textarea>
+        <div class='pull-right'>
+          <button class='btn btn-primary' ng-click='file.saveChanges()'>Save Changes</button>
+          <button class='btn btn-default' ng-click='file.saveChanges()'>Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div ng-hide='editDescription'>
+      <p>{{file.file.description}}</p>
+      <button class='btn btn-default pull-right' ng-click='editDescription = true'>Edit description</button>
+    </div>
+    <div class='torrent-options'>
+      <button class='btn btn-success col-lg-6'>Download .torrent</button>
+      <button class='btn btn-danger col-lg-6'>Delete...</button>
+    </div>
+  </div>
+</div>
