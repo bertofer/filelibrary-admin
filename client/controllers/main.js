@@ -35,7 +35,7 @@ module.exports = function ($state, $scope, $uibModal, filesFactory) {
     modalInstance.result.then(function (obj) {
       var promise = filesFactory.uploadFile(obj)
       var uploadingFile = {
-        name: obj.filename,
+        name: obj.file.name || obj.filename,
         progress: 0
       }
       self.uploadingFiles.push(uploadingFile)

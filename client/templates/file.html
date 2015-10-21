@@ -6,16 +6,17 @@
     <!--<textarea ng-model='file.file.description' ></textarea>-->
     <div ng-show='editDescription'>
       <form class='form-group'>
-        <textarea ng-model='file.file.description' class='form-control'></textarea>
-        <div class='pull-right'>
+        <textarea ng-model='file.tempDescription' class='form-control'></textarea>
+        </br>
+        <div class='container-fluid text-center'>
           <button class='btn btn-primary' ng-click='file.saveChanges()'>Save Changes</button>
-          <button class='btn btn-default' ng-click='file.saveChanges()'>Cancel</button>
+          <button class='btn btn-default' ng-click='editDescription = false'>Cancel</button>
         </div>
       </form>
     </div>
-    <div ng-hide='editDescription'>
-      <p>{{file.file.description}}</p>
-      <button class='btn btn-default pull-right' ng-click='editDescription = true'>Edit description</button>
+    <div ng-hide='editDescription' class='text-center'>
+      <p class='description-container'>{{file.file.description}}</p>
+      <button class='btn btn-default' ng-click='editDescription = true'>Edit description</button>
     </div>
     <div class='torrent-options'>
       <button class='btn btn-success col-lg-4 col-xs-4 col-lg-offset-1 col-xs-offset-1 file-buttons' ng-click='file.downloadTorrent()'>Download </br>.torrent</button>

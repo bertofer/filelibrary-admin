@@ -2,7 +2,7 @@
 @import "navbar";
 @import "file_icons";
 @import "btn_circle";
-@import "ngProgress";
+@import "ng-progress";
 
 body {
   background-color: #eeeeee;
@@ -81,4 +81,8 @@ body {
 
 .delete-buttons {
   margin:10px;
+}
+
+.description-container {
+  min-height: 50px;
 }

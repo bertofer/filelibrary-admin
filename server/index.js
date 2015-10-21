@@ -7,10 +7,11 @@ let config = require('./config')
 let app = express()
 
 let env = process.env.NODE_ENV || 'development'
-console.log(process.env.NODE_ENV)
+
 if (env === 'development') {
   app.use(require('cors')())
 }
+app.use(require('body-parser').json())
 
 app.get('/torrents', routes.getFilesInfo)
 app.post('/upload', routes.uploadFile())

@@ -27,6 +27,15 @@ module.exports = {
 function deleteFile (req, res, next) {
   File.findOne({_id: req.params._id}, (err, doc) => {
     if (err) next(err)
+    debug('params', req.params)
+    debug('query', req.query)
+    if (req.query.disk) {
+      fs.unlink(config.final_dir + doc.name, (err) => {
+        if (err) next(err)
+        debug('File removed from disc')
+      })
+    }
+
     doc.remove()
     res.send(200)
   })
@@ -35,7 +44,7 @@ function deleteFile (req, res, next) {
 function modifyTorrent (req, res, next) {
   File.findOne({_id: req.params._id}, (err, doc) => {
     if (err) next(err)
-    doc.name = req.body.name || doc.name
+    debug('req.body', req.body)
     doc.description = req.body.description || doc.description
     doc.save((err) => {
       if (err) next(err)
@@ -80,8 +89,6 @@ function uploadFile () {
  */
 
 function _moveFile (req, res, next) {
-  debug(req.files.file)
-  debug(req.body)
   req.filename = req.files.file.name
   req.filetemppath = req.files.file.path
   req.filepath = path.join(config.final_dir, req.filename)

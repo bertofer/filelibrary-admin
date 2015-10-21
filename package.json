@@ -27,6 +27,7 @@
     "angular": "^1.4.7",
     "angular-ui-bootstrap": "^0.14.1",
     "angular-ui-router": "^0.2.15",
+    "body-parser": "^1.14.1",
     "composable-middleware": "^0.3.0",
     "connect-multiparty": "^2.0.0",
     "cors": "^2.7.1",

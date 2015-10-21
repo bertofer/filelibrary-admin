@@ -106,14 +106,26 @@ module.exports = function (Upload, SERVER_URL, $q, $http) {
   }
 
   function modifyTorrent (id, obj) {
-
+    var path = 'torrents/' + id
+    var q = $q.defer()
+    $http.post(SERVER_URL + path, obj).then(function (data) {
+      console.log(data)
+      q.resolve(data)
+    }, function (data) {
+      console.log(data)
+      q.reject(data)
+    })
+    return q.promise
   }
 
   function deleteTorrent (id, deleteFromDisc) {
     var q = $q.defer()
-    var data = {}
+    var data = {
+      params: {}
+    }
     var deletePath = 'torrents/' + id
-    if (deleteFromDisc) data.disk = true
+    console.log(deleteFromDisc)
+    if (deleteFromDisc) data.params.disk = 'true'
     $http.delete(SERVER_URL + deletePath, data).then(function (data) {
       console.log(data)
       q.resolve(data)
