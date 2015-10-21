@@ -1,23 +1,25 @@
-<div class="modal-header">
-    <h3 class="modal-title">Upload file</h3>
-</div>
-<div class="modal-body">
-  <form class=''>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Filename</label>
-      <input type="text" class="form-control" ng-model='modal.filename' placeholder="If not set, the original filename will be used">
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <textarea id='file-description' class='form-control' ng-model='modal.description'></textarea>
-    </div>
-    <div class='form-group'>
-        <div class="btn btn-default" ngf-select ng-model="modal.file">Select file</div>
-        <span class='select-file-name'><strong>{{modal.file.name}}</strong></span>
-    </div>
-  </form>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">Upload</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+<div>
+  <div class="modal-header text-center">
+      <h3 class="modal-title">Upload file</h3>
+  </div>
+  <div class="modal-body">
+    <form class=''>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Filename</label>
+        <input type="text" class="form-control" ng-model='modal.filename' placeholder="If not set, the original filename will be used">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id='file-description' class='form-control' ng-model='modal.description'></textarea>
+      </div>
+      <div class='form-group'>
+          <div class="btn btn-default" ngf-select ng-model="modal.file">Select file</div>
+          <span class='select-file-name'><strong>{{modal.file.name}}</strong></span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">Upload</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
 </div>

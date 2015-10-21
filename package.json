@@ -39,7 +39,8 @@
     "mongoose": "^4.1.10",
     "ng-file-upload": "^9.0.12",
     "ngprogress": "^1.1.1",
-    "prettysize": "0.0.3"
+    "prettysize": "0.0.3",
+    "stream-http": "^2.0.2"
   },
   "devDependencies": {
     "babel": "^5.8.23",

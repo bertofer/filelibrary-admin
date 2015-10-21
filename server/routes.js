@@ -17,16 +17,18 @@ const tracker_url = {
 }
 
 module.exports = {
-  getTorrents: getTorrents,
+  getFilesInfo: getFilesInfo,
   uploadFile: uploadFile,
   deleteFile: deleteFile,
-  modifyTorrent: modifyTorrent
+  modifyTorrent: modifyTorrent,
+  getTorrentFile: getTorrentFile
 }
 
 function deleteFile (req, res, next) {
   File.findOne({_id: req.params._id}, (err, doc) => {
     if (err) next(err)
     doc.remove()
+    res.send(200)
   })
 }
 
@@ -42,7 +44,14 @@ function modifyTorrent (req, res, next) {
   })
 }
 
-function getTorrents (req, res, next) {
+function getTorrentFile (req, res, next) {
+  File.findOne({_id: req.params._id}, (err, doc) => {
+    if (err) next(err)
+    res.send(doc.torrent)
+  })
+}
+
+function getFilesInfo (req, res, next) {
   File.find({}, (err, docs) => {
     if (err) next(err)
     res.send(docs)
@@ -114,7 +123,7 @@ function _createTorrent (req, res, next) {
     creationDate: Date.now(),
     private: true,
     announceList: [[url.format(tracker_url)]],
-    urlList: download_url
+    urlList: url.format(download_url)
   }
   debug(path.join(config.final_dir + req.filename))
   debug(req.filepath)

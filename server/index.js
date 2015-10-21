@@ -12,8 +12,9 @@ if (env === 'development') {
   app.use(require('cors')())
 }
 
-app.get('/torrents', routes.getTorrents)
+app.get('/torrents', routes.getFilesInfo)
 app.post('/upload', routes.uploadFile())
+app.get('/torrents/:_id', routes.getTorrentFile)
 app.post('/torrents/:_id', routes.modifyTorrent)
 app.delete('/torrents/:_id', routes.deleteFile)
 

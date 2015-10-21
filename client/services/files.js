@@ -1,12 +1,13 @@
 var _ = require('lodash')
 var fileExtension = require('file-extension')
+var http = require('stream-http')
 
 module.exports = function (Upload, SERVER_URL, $q, $http) {
   var data = {
     files: []
   }
-
   // Used to know if the files list is being loaded
+  // so we can reload on the page of a file
   var filesLoading = null
 
   return {
@@ -20,7 +21,27 @@ module.exports = function (Upload, SERVER_URL, $q, $http) {
   }
 
   function downloadTorrent (id) {
-    // TODO
+    var file = _getFromList(id)
+    http.get(SERVER_URL + 'torrents/' + id, function (res) {
+      var data = []
+      res.on('data', function (chunk) {
+        data.push(chunk) // Append Buffer object
+      })
+
+      res.on('end', function () {
+        data = Buffer.concat(data)
+
+        var blob = new window.Blob([ data ])
+        var url = window.URL.createObjectURL(blob)
+        var a = document.createElement('a')
+
+        a.target = '_blank'
+        a.download = file.name + '.torrent'
+        a.href = url
+        a.textContent = 'Download ' + file.name + '.torrent'
+        a.click()
+      })
+    })
   }
 
   function getFileInfo (id) {
@@ -88,8 +109,19 @@ module.exports = function (Upload, SERVER_URL, $q, $http) {
 
   }
 
-  function deleteTorrent (id) {
-
+  function deleteTorrent (id, deleteFromDisc) {
+    var q = $q.defer()
+    var data = {}
+    var deletePath = 'torrents/' + id
+    if (deleteFromDisc) data.disk = true
+    $http.delete(SERVER_URL + deletePath, data).then(function (data) {
+      console.log(data)
+      q.resolve(data)
+    }, function (data) {
+      console.log(data)
+      q.reject(data)
+    })
+    return q.promise
   }
 
   function _getFromList (id) {
