@@ -36,8 +36,11 @@ function deleteFile (req, res, next) {
       })
     }
 
-    doc.remove()
-    res.send(200)
+    doc.remove((err) => {
+      if (err) next(err)
+      debug('doc removed from mongoose')
+      res.sendStatus(200)
+    })
   })
 }
 
