@@ -1,5 +1,5 @@
 'use strict'
-let config = require('./config')
+//let config = require('./config')
 let compose = require('composable-middleware')
 let multiparty = require('connect-multiparty')
 let createTorrent = require('create-torrent')
@@ -11,9 +11,8 @@ let url = require('url')
 
 const tracker_url = {
   protocol: 'http',
-  hostname: config.server_address,
-  port: config.tracker_port,
-  pathname: '/tracker/'
+  hostname: process.env.TRACKER_ADDRESS,
+  port: process.env.TRACKER_PORT
 }
 
 module.exports = {
@@ -30,17 +29,22 @@ function deleteFile (req, res, next) {
     debug('params', req.params)
     debug('query', req.query)
     if (req.query.disk) {
-      fs.unlink(config.final_dir + doc.name, (err) => {
+      fs.unlink(path.join(process.env.FINAL_DIR,doc.name), (err) => {
         if (err) next(err)
+        else doc.remove((err) => {
+          if (err) next(err)
+          debug('doc removed from mongoose')
+          res.sendStatus(200)
+        })
         debug('File removed from disc')
       })
+    } else {
+      doc.remove((err) => {
+        if (err) next(err)
+        debug('doc removed from mongoose')
+        res.sendStatus(200)
+      })
     }
-
-    doc.remove((err) => {
-      if (err) next(err)
-      debug('doc removed from mongoose')
-      res.sendStatus(200)
-    })
   })
 }
 
@@ -72,7 +76,13 @@ function getFilesInfo (req, res, next) {
 
 function uploadFile () {
   return compose()
-    .use(multiparty({uploadDir: config.temp_dir}))
+    .use((req,res,next) => {
+      _createDirIfNotExists(process.env.TEMP_DIR, next)
+    })
+    .use(multiparty({uploadDir: process.env.TEMP_DIR}))
+    .use((req,res,next) => {
+      _createDirIfNotExists(process.env.FINAL_DIR, next)
+    })
     .use(_moveFile)
     .use(_createTorrent)
     .use(_saveTorrent)
@@ -80,6 +90,21 @@ function uploadFile () {
       debug('sending response, why not receiving it')
       res.send(req.createdTorrent)
     })
+}
+
+/**
+ * Function that creates a directory if it not exists
+ */
+function _createDirIfNotExists (dir, cb) {
+  fs.access(dir, fs.R_OK | fs.W_OK, (err) => {
+    // If error, then create folder
+    if(!err) cb()
+    else if(err.code === 'ENOENT') {
+      fs.mkdir(dir, () => {
+        cb()
+      })
+    } else cb(err)
+  })
 }
 
 /**
@@ -94,7 +119,7 @@ function uploadFile () {
 function _moveFile (req, res, next) {
   req.filename = req.files.file.name
   req.filetemppath = req.files.file.path
-  req.filepath = path.join(config.final_dir, req.filename)
+  req.filepath = path.join(process.env.FINAL_DIR, req.filename)
 
   let source = fs.createReadStream(req.filetemppath)
   let dest = fs.createWriteStream(req.filepath)
@@ -122,22 +147,20 @@ function _moveFile (req, res, next) {
 function _createTorrent (req, res, next) {
   let download_url = {
     protocol: 'http',
-    hostname: config.server_address,
-    port: config.webseed_port,
-    pathname: path.join('/downloads/' + req.filename)
+    hostname: process.env.WEBSEED_ADRRESS,
+    port: process.env.WEBSEED_PORT,
+    pathname: path.join('/' + req.filename)
   }
 
   var opts = {
     name: req.filename,
-    createdBy: config.author,
+    createdBy: process.env.AUTHOR,
     creationDate: Date.now(),
     private: true,
     announceList: [[url.format(tracker_url)]],
     urlList: url.format(download_url)
   }
-  debug(path.join(config.final_dir + req.filename))
-  debug(req.filepath)
-  createTorrent(path.join(config.final_dir + req.filename), opts,
+  createTorrent(path.join(process.env.FINAL_DIR, req.filename), opts,
   (err, torrent) => {
     if (err) next(err)
     req.torrentFile = torrent

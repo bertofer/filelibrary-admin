@@ -1,0 +1,12 @@
+# ENV Variables
+
+SERVER_ADDRESS
+APP_PORT (Which port you want to listen)
+TEMP_DIR
+FINAL_DIR
+AUTHOR (For the created torrents)
+WEBSEED_ADDRESS
+WEBSEED_PORT
+TRACKER_ADDRESS
+TRACKER_PORT
+DB_PATH
