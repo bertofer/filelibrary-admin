@@ -102,11 +102,16 @@ gulp.task('ng-dev', () => {
 
 gulp.task('ng-prod', () => {
     let prodConstants = {
-        SERVER_URL: process.env.SERVER_URL
+        SERVER_URL: url.format({
+          protocol: 'http',
+          hostname: process.env.SERVER_ADDRESS,
+          // don't use port as it can be mapped in deployment to anything else
+          pathname: 'api/'
+        })
     }
     return ngConstant({
       name: 'filelibrary.constants',
-      constants: devConstants,
+      constants: prodConstants,
       stream: true,
       wram: 'amd'
     })
