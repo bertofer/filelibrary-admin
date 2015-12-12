@@ -97,14 +97,20 @@ gulp.task('ng-dev', () => {
     stream: true,
     wram: 'amd'
   })
-  //.pipe(source('ngConstants.js'))
   .pipe(gulp.dest('./client/dist'))
 })
 
 gulp.task('ng-prod', () => {
     let prodConstants = {
-        SERVER_ULR: process.env.SERVER_URL
+        SERVER_URL: process.env.SERVER_URL
     }
+    return ngConstant({
+      name: 'filelibrary.constants',
+      constants: devConstants,
+      stream: true,
+      wram: 'amd'
+    })
+    .pipe(gulp.dest('./client/dist'))
 })
 
 gulp.task('client', ['clean', 'scripts', 'sass', 'ng-dev'])

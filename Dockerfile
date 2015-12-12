@@ -11,4 +11,4 @@ RUN ["npm", "install", "-g", "gulp", "browserify", "babel"]
 
 RUN ["gulp", "prepare-client"]
 
-CMD ["node","--harmony", "server/index.js"]
+CMD ["scripts/run.sh"]

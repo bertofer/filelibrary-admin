@@ -1,11 +1,4 @@
-docker run -d -p 80:8000 \
--e SERVER_ADDRESS=""
--e APP_PORT=
--e TEMP_DIR=""
--e FINAL_DIR=""
--e AUTHOR=""
--e WEBSEED_ADDRESS=""
--e WEBSEED_PORT=
--e TRACKER_ADDRESS=""
--e TRACKER_PORT=
--e DB_PATH=
+#!/bin/sh
+cd ../
+gulp prepare-client
+node --harmony server/index.js #to change by pm2 in the future
