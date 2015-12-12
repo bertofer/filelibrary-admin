@@ -9,6 +9,4 @@ RUN ["npm", "install"]
 #Install general packages
 RUN ["npm", "install", "-g", "gulp", "browserify", "babel"]
 
-RUN ["gulp", "prepare-client"]
-
 CMD ["sh", "scripts/run.sh"]
