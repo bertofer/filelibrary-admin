@@ -11,4 +11,4 @@ RUN ["npm", "install", "-g", "gulp", "browserify", "babel"]
 
 RUN ["gulp", "prepare-client"]
 
-CMD ["scripts/run.sh"]
+CMD ["sh", "scripts/run.sh"]
