@@ -1,0 +1,11 @@
+docker run -d -p 80:8000 \
+-e SERVER_ADDRESS=""
+-e APP_PORT=
+-e TEMP_DIR=""
+-e FINAL_DIR=""
+-e AUTHOR=""
+-e WEBSEED_ADDRESS=""
+-e WEBSEED_PORT=
+-e TRACKER_ADDRESS=""
+-e TRACKER_PORT=
+-e DB_PATH=
