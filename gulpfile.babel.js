@@ -70,7 +70,7 @@ gulp.task('nodemon', function () {
       js: 'node --harmony'
     },
     env: { 'NODE_ENV': 'development' }
-  }).on('restart', ['client']);
+  }).on('restart', ['client', 'ng-dev']);
 })
 
 gulp.task('debugger', () => {
@@ -118,7 +118,7 @@ gulp.task('ng-prod', () => {
     .pipe(gulp.dest('./client/dist'))
 })
 
-gulp.task('client', ['clean', 'scripts', 'sass', 'ng-dev'])
+gulp.task('client', ['clean', 'scripts', 'sass'])
 gulp.task('debug', ['client', 'dev-env', 'debugger'])
-gulp.task('develop', ['client', 'dev-env', 'nodemon'])
+gulp.task('develop', ['client', 'dev-env', 'ng-dev', 'nodemon'])
 gulp.task('prepare-client', ['client', 'ng-prod'])
