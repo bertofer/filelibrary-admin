@@ -49,6 +49,7 @@ var localDev = {
     FINAL_DIR: path.join(__dirname, 'finalFiles'),
     AUTHOR: 'Test Author',
     WEBSEED_ADDRESS: 'localhost',
+    WEBSEED_PROTOCOL: 'http',
     WEBSEED_PORT: 8001,
     TRACKER_ADDRESS: 'localhost',
     TRACKER_PORT: 8002,

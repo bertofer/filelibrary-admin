@@ -146,8 +146,8 @@ function _moveFile (req, res, next) {
  */
 function _createTorrent (req, res, next) {
   let download_url = {
-    protocol: 'http',
-    hostname: process.env.WEBSEED_ADRRESS,
+    protocol: process.env.WEBSEED_PROTOCOL,
+    hostname: process.env.WEBSEED_ADDRESS,
     port: process.env.WEBSEED_PORT,
     pathname: path.join('/' + req.filename)
   }
