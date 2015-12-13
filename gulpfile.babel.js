@@ -43,6 +43,7 @@ gulp.task('sass', () => {
 var localDev = {
     DEBUG: '*',
     SERVER_ADDRESS : 'localhost',
+    SERVER_PROTOCOL: 'http',
     APP_PORT : 8000,
     TEMP_DIR: path.join(__dirname, 'tempFiles'),
     FINAL_DIR: path.join(__dirname, 'finalFiles'),
@@ -85,7 +86,7 @@ gulp.task('debugger', () => {
 gulp.task('ng-dev', () => {
   let devConstants = {
     SERVER_URL: url.format({
-        protocol: 'http',
+        protocol: localDev.SERVER_PROTOCOL,
         hostname: localDev.SERVER_ADDRESS,
         port: localDev.APP_PORT,
         pathname: 'api/'
