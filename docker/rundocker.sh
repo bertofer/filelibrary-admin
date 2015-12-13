@@ -3,8 +3,9 @@
 # your environment.
 export APP_PORT=
 
-docker run -p 8080:$APP_PORT \
+docker run -p 80:$APP_PORT \
 --expose $APP_PORT \
+-e SERVER_PROTOCOL='http | https' \
 -e SERVER_ADDRESS="" \
 -e APP_PORT=$APP_PORT \
 -e TEMP_DIR="" \
