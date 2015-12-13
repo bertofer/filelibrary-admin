@@ -3,3 +3,4 @@ client/dist/
 server/npm_debug.log
 tempFiles/
 finalFiles/
+docker/build.sh
