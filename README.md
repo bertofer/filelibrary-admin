@@ -1,5 +1,6 @@
 # ENV Variables
 
+SERVER_PROTOCOL = http | https
 SERVER_ADDRESS
 APP_PORT (Which port you want to listen)
 TEMP_DIR

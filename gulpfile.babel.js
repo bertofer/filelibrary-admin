@@ -103,7 +103,7 @@ gulp.task('ng-dev', () => {
 gulp.task('ng-prod', () => {
     let prodConstants = {
         SERVER_URL: url.format({
-          protocol: 'http',
+          protocol: process.env.SERVER_PROTOCOL,
           hostname: process.env.SERVER_ADDRESS,
           // don't use port as it can be mapped in deployment to anything else
           pathname: 'api/'
